@@ -1,0 +1,14 @@
+<StarAppFitImage@FitImage>
+    angle: 0
+    size_hint: None, None
+    radius: [self.width / 2,]
+    pos_hint: {"center_x": .5, "center_y": .5}
+    mipmap: True
+
+    canvas.before:
+        PushMatrix
+        Rotate:
+            angle: root.angle
+            origin: self.center
+    canvas.after:
+        PopMatrix

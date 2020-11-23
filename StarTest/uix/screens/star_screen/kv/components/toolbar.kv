@@ -1,0 +1,20 @@
+<StarAppToolbar@MDBoxLayout>
+    color: 0, 0, 0, 1
+    adaptive_height: True
+    padding: "20dp", 0, "20dp", 0
+    pos_hint: {"center_y": .92}
+
+    MDIconButton:
+        icon: "magnify"
+        theme_text_color: "Custom"
+        text_color: root.color
+
+    StarAppLabel:
+        text: "X O R E"
+        color: root.color
+        pos_hint: {"center_y": .5}
+
+    MDIconButton:
+        icon: "menu"
+        theme_text_color: "Custom"
+        text_color: root.color

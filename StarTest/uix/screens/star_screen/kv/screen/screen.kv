@@ -1,0 +1,102 @@
+<StarAppScreen>
+
+    StarAppVerticalLabel:
+        id: vertical_lbl
+
+    StarAppFitImage:
+        id: helmet_img
+        source: "data/images/space-helmet.png"
+        size: "250dp", "250dp"
+        on_touch_down:
+            if self.collide_point(*args[1].pos): \
+            root.start_animation() if not root.animation_back else root.back_animation()
+
+    FitImage:
+        id: bg_img
+        source: "data/images/stars-bg.jpg"
+        opacity: 0
+        size: root.size
+
+    StarAppFitImage:
+        id: earth_img
+        opacity: 0
+        source: "data/images/earth.png"
+        size: 0, 0
+        pos_hint: {"center_x": .5, "center_y": .35}
+
+    StarAppFitImage:
+        id: planet_img
+        size: "100dp", "100dp"
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+    FitImage:
+        id: light_img
+        source: "data/images/light.png"
+        opacity: 0
+
+    MDBoxLayout:
+        id: box_name_planet
+        opacity: 0
+        orientation: "vertical"
+        adaptive_height: True
+        spacing: "8dp"
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+        StarAppLabel:
+            id: name_planet
+            text: "E A R T H"
+            font_size: "32sp"
+
+        StarAppSeparator:
+            width: "100dp"
+
+    Image:
+        id: shadow_planet_img
+        source: "data/images/shadow.png"
+        size_hint: None, None
+        width: root.width
+        allow_stretch: True
+        keep_ratio: False
+        pos_hint: {"center_x": .5}
+        y: -self.height
+
+    StarAppLabelInfo:
+        id: planet_lbl
+        text: "M A R S"
+        font_size: "32sp"
+
+    StarAppLabelInfo:
+        id: info_lbl
+        text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit"
+        -text_size: root.width - dp(40), None
+
+    StarAppLabelInfo:
+        id: more_lbl
+        text: "Read more"
+        bold: True
+
+    StarAppSeparator:
+        id: sep
+        width: "70dp"
+        opacity: 0
+        y: -self.height
+
+    MDBoxLayout:
+        id: box_carousel
+        adaptive_height: True
+        padding: "40dp"
+
+        MDIconButton:
+            icon: "chevron-left"
+            on_release: carousel.load_previous()
+
+        Carousel:
+            id: carousel
+            on_index: root.set_planet(*args)
+
+        MDIconButton:
+            icon: "chevron-right"
+            on_release: carousel.load_next()
+
+    StarAppToolbar
+        id: toolbar

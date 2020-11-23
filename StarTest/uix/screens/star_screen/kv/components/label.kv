@@ -1,0 +1,28 @@
+#:import Window kivy.core.window.Window
+
+
+<StarAppLabel>
+    adaptive_height: True
+    theme_text_color: "Custom"
+    text_color: 1, 1, 1, 1
+
+
+<StarAppLabelInfo@StarAppLabel>
+    font_size: "12sp"
+    opacity: 0
+    y: -self.height
+
+
+<StarAppVerticalLabel@Label>
+    color: app.theme_cls.secondary_text_color
+    halign: "center"
+    pos_hint: {"center_x": .5, "center_y": .5}
+    font_size: "96sp"
+
+    canvas.before:
+        PushMatrix
+        Rotate:
+            angle: 90
+            origin: self.center
+    canvas.after:
+        PopMatrix
