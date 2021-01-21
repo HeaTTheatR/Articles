@@ -1,0 +1,140 @@
+<ScaleBox>
+    canvas.before:
+        PushMatrix
+        Scale:
+            x: root.scale
+            y: root.scale
+            z: root.scale
+            origin: self.center
+    canvas.after:
+        PopMatrix
+
+
+<FingerprintBox>
+    orientation: "vertical"
+    adaptive_height: True
+    spacing: "48dp"
+    pos_hint: {"center_x": .5, "center_y": .5}
+
+    MDLabel:
+        text: "Place Your Finger\non the Device Now"
+        font_style: "H5"
+        adaptive_size: True
+        pos_hint: {"center_x": .5}
+
+    MDIconButton:
+        canvas:
+            Color:
+                rgba: app.theme_cls.primary_color
+            Line:
+                width: 1.2
+                circle: (self.center_x, self.center_y, sp(62))
+
+        icon: "fingerprint"
+        user_font_size: "64sp"
+        pos_hint: {"center_x": .5}
+        md_bg_color: app.theme_cls.primary_color
+
+
+<SignInBox>
+    orientation: "vertical"
+    adaptive_height: True
+    spacing: "12dp"
+    padding: "36dp", 0, "36dp", 0
+    pos_hint: {"center_x": .5, "center_y": .5}
+
+    MDLabel:
+        text: "Sign In"
+        font_style: "H5"
+        adaptive_size: True
+        pos_hint: {"center_x": .5}
+
+    Widget:
+        size_hint_y: None
+        height: "36dp"
+
+    MDTextField:
+        hint_text: "EMAIL ADDRESS"
+
+    MDTextField:
+        hint_text: "PASSWORD"
+
+    Widget:
+        size_hint_y: None
+        height: "36dp"
+
+    MDRoundFlatButton:
+        text: "SIGN IN"
+        pos_hint: {"center_x": .5}
+        line_width: 1.2
+
+
+<LoginScreen>
+
+    FitImage:
+        source: "data/images/bg.jpg"
+
+    MDCard:
+        id: box
+        size_hint: .8, .8
+        pos_hint: {"center_x": .5, "center_y": .5}
+        radius: [20,]
+        elevation: 12
+        md_bg_color: 0, 0, 0, .7
+
+        ScaleBox:
+            id: fingerprint_enabled_box
+            orientation: "vertical"
+            adaptive_height: True
+            spacing: "32dp"
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+            MDLabel:
+                text: "Don`t Have a\nFingerprint Enabled\nDevice?"
+                opposite_colors: True
+                font_style: "H5"
+                adaptive_size: True
+                pos_hint: {"center_x": .5}
+
+            MDRoundFlatButton:
+                text: "STANDARD SIGN IN"
+                pos_hint: {"center_x": .5}
+                line_width: 1.2
+                on_release: root.animation_to_left()
+
+        ScaleBox:
+            id: start_uding_fingerprint_box
+            orientation: "vertical"
+            adaptive_height: True
+            spacing: "32dp"
+            pos_hint: {"center_x": .5, "center_y": .5}
+
+            MDLabel:
+                text: "Start Using Your\nFingerprint"
+                opposite_colors: True
+                font_style: "H5"
+                adaptive_size: True
+                pos_hint: {"center_x": .5}
+
+            MDIconButton:
+                icon: "fingerprint"
+                user_font_size: "64sp"
+                pos_hint: {"center_x": .5}
+                md_bg_color: app.theme_cls.primary_color
+
+            MDRoundFlatButton:
+                text: "USE FINGERPRINT"
+                pos_hint: {"center_x": .5}
+                line_width: 1.2
+                on_release: root.animation_to_right()
+
+    MDCard:
+        id: box2
+        size_hint: None, None
+        size: box.width / 2, box.height + dp(40)
+        radius: [20,]
+        elevation: 12
+        x: box.x + dp(20) + root.card_x
+        y: box.y - dp(20)
+
+        SignInBox:
