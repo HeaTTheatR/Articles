@@ -1,0 +1,161 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import Animation kivy.animation.Animation
+#:import Clock kivy.clock.Clock
+#:import images_path kivymd.images_path
+
+#: set custom_color get_color_from_hex("#939fa6")
+
+
+<CustomMDLabel@MDLabel>
+    theme_text_color: "Custom"
+    text_color: custom_color
+
+
+<CustomTextInput@TextInput>
+    background_normal: f"{images_path}transparent.png"
+    background_active: self.background_normal
+    padding: "8dp", "8dp", "8dp", 0
+    cursor_color: custom_color
+
+    canvas.before:
+        Color:
+            rgba: 0, 0, 0, .2
+        RoundedRectangle:
+            pos: self.pos
+            size: self.size
+            radius: [8,]
+
+
+<ScaleImage@FitImage>
+    scale: 1
+    radius: [15, ]
+
+    canvas.before:
+        PushMatrix
+        Scale:
+            x: root.scale
+            y: root.scale
+            z: root.scale
+            origin: self.center
+        Color:
+            rgba: 0, 0, 0, 1
+        Line:
+            width: 1.2
+            rounded_rectangle:
+                self.x, self.y, self.width, self.height, \
+                15, 15, 15, 15, \
+                self.height
+    canvas.after:
+        PopMatrix
+
+
+
+<LoginScreen>
+    md_bg_color: get_color_from_hex("#5a6a75")
+
+    ScaleImage:
+        id: avatar
+        source: "data/images/avatar.jpg"
+        size_hint: None, None
+        size: "120dp", "120dp"
+        pos_hint: {"center_x": .5}
+        y: root.height - self.height - dp(56)
+
+    CustomMDLabel:
+        id: email_label
+        text: "Email address"
+        adaptive_size: True
+        pos_hint: {"center_y": .5}
+        x: email_field.x - self.width - dp(12)
+
+    CustomTextInput:
+        id: email_field
+        opacity: email_label.opacity
+        size_hint: None, None
+        size: signin_button.size
+        pos_hint: {"center_y": .5}
+        x: root.center[0] - self.width / 2 - root.shift_x_email
+
+    CustomMDLabel:
+        id: password_label
+        text: "Password"
+        adaptive_size: True
+        y: email_field.y - signin_button.height
+        x: password_field.x - self.width - dp(12)
+
+    CustomTextInput:
+        id: password_field
+        opacity: password_label.opacity
+        size_hint: None, None
+        size: signin_button.size
+        y: email_field.y - signin_button.height - dp(12)
+        x: root.center[0] - self.width / 2 - root.shift_x_password
+
+    MDFillRoundFlatButton:
+        id: signin_button
+        text: "Sign In"
+        size_hint_x: .4
+        y: password_field.y - self.height - dp(12)
+        _radius: 8
+        x: root.center[0] - self.width / 2 - root.shift_x_signin_button
+        on_release:
+            authentification_field.disabled = False
+            root.animation_avatar()
+            root.animation_hide_email_widgets()
+            Clock.schedule_once(root.animation_hide_password_widgets, .1)
+            Clock.schedule_once(root.animation_hide_signin_button, .2)
+            Clock.schedule_once(root.animation_show_authentification_label, .8)
+            Clock.schedule_once(root.animation_show_security_label, .9)
+            Clock.schedule_once(root.animation_show_authentification_field, 1)
+            Clock.schedule_once(root.animation_show_auth_button, 1.1)
+            Clock.schedule_once(root.animation_show_device_label, 1.2)
+
+    CustomMDLabel:
+        id: authentification_label
+        text: "Enter your authentification code"
+        adaptive_size: True
+        bold: True
+        y: root.center[1] + root.shift_y_authentification_label
+        opacity: 0
+        font_style: "Button"
+        pos_hint: {"center_x": .5}
+
+    CustomMDLabel:
+        id: security_label
+        text: "Use your authentificator code app tp view your\nsecurity code."
+        adaptive_height: True
+        y: root.center[1] - dp(12) + root.shift_y_security_label
+        opacity: 0
+        halign: "center"
+        pos_hint: {"center_x": .5}
+        font_style: "Caption"
+
+    CustomTextInput:
+        id: authentification_field
+        opacity: 0
+        hint_text: "Authentification code"
+        size_hint: None, None
+        size: signin_button.size
+        y: root.center[1] - self.height - dp(36) + root.shift_y_authentification_field
+        pos_hint: {"center_x": .5}
+        disabled: True
+
+    MDFillRoundFlatButton:
+        id: auth_button
+        text: "Sign In"
+        size_hint: None, None
+        size: signin_button.size
+        y: root.center[1] - self.height - dp(84) + root.shift_y_auth_button
+        _radius: 8
+        opacity: 0
+        size_hint_x: .4
+        pos_hint: {"center_x": .5}
+
+    CustomMDLabel:
+        id: lost_device_label
+        text: "Lost your mobile device?"
+        adaptive_height: True
+        y: root.center[1] - dp(148) + root.shift_y_device_label
+        opacity: 0
+        halign: "center"
+        pos_hint: {"center_x": .5}
