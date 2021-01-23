@@ -1,0 +1,123 @@
+#:import Clock kivy.clock.Clock
+
+
+<RoundDisk@FitImage>
+    angle: 0
+    radius: [self.width / 2, ]
+
+    canvas.before:
+        PushMatrix
+        Rotate:
+            angle: root.angle
+            origin: self.center
+    canvas.after:
+        PopMatrix
+
+
+<ProgressBox@MDBoxLayout>
+    orientation: "vertical"
+
+    MDLabel:
+        text: "Metallica"
+        bold: True
+
+    MDLabel:
+        id: name_track
+        text: "And Justice For All"
+        font_style: "Caption"
+
+    Widget:
+        size_hint_y: None
+        height: "4dp"
+
+    MDLabel:
+        id: track_seconds
+        text: "00:00"
+        font_style: "Caption"
+        theme_text_color: "Custom"
+        text_color: app.theme_cls.primary_color
+
+    MDProgressBar:
+        id: progress_bar
+        value: 0
+        max: 100
+
+
+<AudioWidget>
+    size_hint: .5, .15
+    auto_dismiss: False
+    overlay_color: 0, 0, 0, .2
+    radius: [15,]
+
+    MDRelativeLayout:
+
+        ProgressBox:
+            id: progress_box
+            size_hint: None, None
+            size: root.width - dp(24), root.height
+            md_bg_color: 1, 1, 1, 1
+            radius: root.radius
+            opacity: .5
+            x: dp(12)
+            padding: button_box.x, "12dp", "12dp", "16dp"
+
+        MDCard:
+            elevation: 12
+            radius: root.radius
+
+        RoundBoxDisk:
+            id: disk_box
+            size_hint: None, None
+            size: root.height + dp(6), root.height + dp(6)
+            x: "36dp"
+            y: root.height / 2 - dp(12)
+            radius: [self.width / 2, ]
+            md_bg_color:  1, 1, 1, 1
+            elevation: 0
+
+            RoundDisk:
+                id: round_disk
+                angle: root.spin_disk_angle
+                size_hint: None, None
+                size: disk_box.width - dp(12), disk_box.height - dp(12)
+                source: "data/images/and-justice-for-all.png"
+                x: disk_box.x + dp(6)
+                y: disk_box.y + dp(6)
+
+        MDBoxLayout:
+            id: button_box
+            adaptive_size: True
+            spacing: "12dp"
+            pos_hint: {"center_y": .5}
+            x: disk_box.x + disk_box.width
+
+            MDIconButton:
+                user_font_size: "42sp"
+                icon: "chevron-double-left"
+                on_release:
+                    root.change_bg(app.fit_image, "data/images/and-justice-for-all-bg.jpg")
+                    round_disk.source = "data/images/and-justice-for-all.png"
+                    progress_box.ids.name_track.text = "And Justice For All"
+
+            MDIconButton:
+                user_font_size: "42sp"
+                icon: "play-outline"
+                on_release:
+                    if self.icon == "play-outline": \
+                    root.show_progress_box(); \
+                    Clock.schedule_interval(root.spin_disk, .01); \
+                    self.icon = "stop"; \
+                    root.start_timer()
+
+                    elif self.icon == "stop": \
+                    self.icon = "play-outline"; \
+                    root.hide_progress_box(); \
+                    Clock.unschedule(root.spin_disk)
+
+            MDIconButton:
+                user_font_size: "42sp"
+                icon: "chevron-double-right"
+                on_release:
+                    root.change_bg(app.fit_image, "data/images/load-bg.jpg")
+                    round_disk.source = "data/images/load.png"
+                    progress_box.ids.name_track.text = "2x4"
