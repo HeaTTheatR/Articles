@@ -1,0 +1,176 @@
+#:import SnowFall snow.SnowFall
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+
+<TemperatureCelsius@MDBoxLayout>
+    scale: 1
+    size_hint_y: None
+    height: self.width
+    adaptive_width: True
+    padding: "4dp"
+
+    canvas.before:
+        PushMatrix
+        Scale:
+            x: root.scale
+            y: root.scale
+            z: root.scale
+            origin: self.center
+        Color:
+            rgba: app.theme_cls.primary_color
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [root.width / 2,]
+    canvas.after:
+        PopMatrix
+
+    MDLabel:
+        adaptive_size: True
+        text: "-3"
+        pos_hint: {"center_y": .5}
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+
+    MDIcon:
+        adaptive_size: True
+        icon: "temperature-celsius"
+        pos_hint: {"center_y": .5}
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+
+
+<SnowFlakeBg>
+    canvas.before:
+        PushMatrix
+        Scale:
+            x: root.scale
+            y: root.scale
+            z: root.scale
+            origin: self.center
+        Color:
+            rgba: 0, 1, 1, .2
+        RoundedRectangle:
+            size: self.size
+            pos: self.pos
+            radius: [root.width / 2,]
+    canvas.after:
+        PopMatrix
+
+
+<ClockSnowScreen>
+    canvas.before:
+        Rectangle:
+            size: self.size
+            pos: self.pos
+            source: "data/images/bg.png"
+
+    RoundShadowBox:
+        size_hint: None, None
+        size: "300dp", "300dp"
+        md_bg_color: get_color_from_hex("#09222a")
+        pos_hint: {"center_x": .5, "center_y": .5}
+
+        canvas.before:
+            StencilPush
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius: [root.width / 2,]
+            StencilUse
+
+        canvas.after:
+            StencilUnUse
+            RoundedRectangle:
+                size: self.size
+                pos: self.pos
+                radius: [root.width / 2,]
+            StencilPop
+
+        SnowFall:
+            id: snow
+            size_hint: None, None
+            size: root.size
+            number: 300
+            size_range: (dp(2), dp(7))
+
+        SnowFlakeBg:
+            id: snowflake_bg
+            size_hint: None, None
+            size: "110dp", "110dp"
+            pos_hint: {"center_x": .5}
+            y: snow.center[1] - dp(12)
+
+            MDIconButton:
+                id: snowflake
+                scale: 0
+                icon: "snowflake"
+                user_font_size: "72sp"
+                pos_hint: {"center_x": .5, "center_y": .5}
+                opposite_colors: True
+
+                canvas.before:
+                    PushMatrix
+                    Scale:
+                        x: self.scale
+                        y: self.scale
+                        z: self.scale
+                        origin: self.center
+                canvas.after:
+                    PopMatrix
+
+    MDLabel:
+        id: temperature_label
+        scale: 0
+        text: "TEMPERATURE"
+        theme_text_color: "Custom"
+        adaptive_size: True
+        bold: True
+        text_color: 1, 1, 1, .4
+        font_name: "data/font/Weather.ttf"
+        font_size: "24sp"
+        x: snow.center[0] - self.width / 2
+        y: snow.center[1] - self.height / 2 - dp(64)
+
+        canvas.before:
+            PushMatrix
+            Scale:
+                y: self.scale
+                origin: self.center
+        canvas.after:
+            PopMatrix
+
+    MDLabel:
+        id: city_label
+        scale: 0
+        text: "FINLAND"
+        theme_text_color: "Custom"
+        adaptive_size: True
+        bold: True
+        text_color: 1, 1, 1, .4
+        font_name: "data/font/Weather.ttf"
+        font_size: "18sp"
+        x: temperature_label.center[0] - self.width / 2
+        y: temperature_label.center[1] - self.height / 2 - temperature_label.height
+
+        canvas.before:
+            PushMatrix
+            Scale:
+                y: self.scale
+                origin: self.center
+        canvas.after:
+            PopMatrix
+
+    TemperatureCelsius:
+        id: temperature_celsius_box
+        scale: 0
+        y: snowflake_bg.y + self.height * 2 - root.shift_celsius_box / 2
+        x: snowflake_bg.x + self.width / 2 + root.shift_celsius_box
+
+        canvas.before:
+            PushMatrix
+            Scale:
+                y: self.scale
+                origin: self.center
+        canvas.after:
+            PopMatrix
