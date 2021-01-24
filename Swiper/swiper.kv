@@ -1,0 +1,61 @@
+#:import os os
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+
+
+<ItemSwiper>
+    orientation: "vertical"
+
+    MDRelativeLayout:
+
+        FitImage:
+            radius: [20,]
+            source: root.source
+
+        Widget:
+            canvas:
+                RoundedRectangle:
+                    radius: [20,]
+                    source: "data/images/0.png"
+                    pos: self.pos
+                    size: self.size
+
+        MDBoxLayout:
+            radius: [0, 0, 20, 20]
+            size_hint_y: None
+            height: 86
+            md_bg_color: 1, 1, 1, 1
+            padding: "8dp"
+
+            TwoLineListItem:
+                text: "[b]City[b]"
+                secondary_text: root.name_city
+                divider: None
+                _no_ripple_effect: True
+
+
+<Swiper>
+
+    ScreenManager:
+        id: manager
+        transition: FadeTransition()
+
+    MDSwiper:
+        id: swiper
+        size_hint_y: None
+        height: root.height - dp(240)
+        y: dp(56)
+        on_swipe:
+            manager.current = os.path.split(self.get_current_item().source)[1]
+            city_label.text = root.cities[manager.current]
+
+    MDLabel:
+        id: city_label
+        text: "New York"
+        font_style: "H3"
+        bold: True
+        adaptive_height: True
+        y: root.height - self.height - dp(56)
+        halign: "center"
+        font_name: "data/font/A-Space.otf"
+        theme_text_color: "Custom"
+        text_color: app.theme_cls.disabled_hint_text_color
