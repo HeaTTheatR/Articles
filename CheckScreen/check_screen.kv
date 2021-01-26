@@ -1,0 +1,165 @@
+<RoundButton@MDIconButton>
+    line_color: None
+    opposite_colors: True
+    theme_text_color: "Custom"
+    text_color: app.theme_cls.primary_color
+    user_font_size: "46sp"
+
+    canvas.before:
+        Color:
+            rgba: self.text_color if not root.line_color else root.line_color
+        Line:
+            width: 2
+            rounded_rectangle:
+                self.x, self.y, self.width, self.height, \
+                self.width / 2, self.width / 2, self.width / 2, self.width / 2, \
+                self.height
+
+
+<CustomLabel@MDLabel>
+    theme_text_color: "Custom"
+    text_color: app.theme_cls.primary_color
+    font_name: "data/font/font.ttf"
+
+
+<CustomPoint@MDIconButton>
+    user_font_size: "12sp"
+    theme_text_color: "Custom"
+    text_color: .8, .8, .8, 1
+
+
+<CustomButton>
+
+
+<CheckScreen>
+
+    FitImage:
+        id: bg_image
+        source: "data/images/bg.jpg"
+        size_hint: None, None
+        size: root.width + dp(300), root.height + dp(300)
+
+    MDBoxLayout:
+        id: toolbar_actions
+        adaptive_height: True
+        padding: "20dp", 0, "20dp", 0
+        y: root.height
+        opacity: 0
+
+        MDTextButton:
+            text: "Cancel"
+            bold: True
+            color: app.theme_cls.primary_color
+            size_hint_x: .33
+
+        MDTextButton:
+            text: "Sign Up"
+            color: 1, 1, 1, 1
+            bold: True
+            halign: "center"
+            size_hint_x: .33
+
+        MDTextButton:
+            text: "Join"
+            bold: True
+            halign: "right"
+            color: app.theme_cls.primary_color
+            size_hint_x: .33
+
+    CustomLabel:
+        id: form_label
+        text: "To get started, we`ll need a few thing from you."
+        font_size: "15sp"
+        pos_hint: {"center_x": .5}
+        adaptive_size: True
+        y: root.height - (toolbar_actions.height + dp(72))
+        opacity: 0
+
+    CustomLabel:
+        id: already_label
+        text: "Already have an account?"
+        font_size: "15sp"
+        pos_hint: {"center_x": .5}
+        adaptive_size: True
+        y: root.height - (dp(368) + self.height + dp(40))
+        opacity: 0
+        text_color: 1, 1, 1, 1
+
+    MDBoxLayout:
+        id: check_box
+        orientation: "vertical"
+        adaptive_size: True
+        pos_hint: {"center_x": .5, "center_y": .65}
+        spacing: "4dp"
+
+        RoundButton:
+            icon: "check"
+            pos_hint: {"center_x": .5}
+
+        Widget:
+            size_hint_y: None
+            height: "24dp"
+
+        CustomLabel:
+            text: "Check In"
+            text_color: 1, 1, 1, 1
+            font_style: "H4"
+            pos_hint: {"center_x": .5}
+            adaptive_size: True
+
+        Widget:
+            size_hint_y: None
+            height: "8dp"
+
+        CustomLabel:
+            text: "Check into your book when you start"
+            pos_hint: {"center_x": .5}
+            adaptive_size: True
+
+        CustomLabel:
+            text: "reading and leave notes alog the way."
+            pos_hint: {"center_x": .5}
+            adaptive_size: True
+
+    MDBoxLayout:
+        id: point_box
+        adaptive_size: True
+        pos_hint: {"center_x": .5}
+        y: dp(40) + login_button.height * 2
+
+        CustomPoint:
+        CustomPoint:
+        CustomPoint:
+        CustomPoint:
+
+    CustomButton:
+        id: signin_button
+        y: "40dp"
+        x: "20dp"
+        size_hint: None, None
+        size:
+            root.width / 2 - dp(30) + root.increment_width, \
+            dp(56) + root.increment_height
+        on_touch_down:
+            if self.collide_point(*args[1].pos) \
+            and len(signin_button.children) == 1: root.start_animation()
+
+        CustomLabel:
+            id: signin_label
+            text: "SIGN IN"
+            text_color: 0, 0, 0, 1
+            pos_hint: {"center_x": .5, "center_y": .5}
+            adaptive_size: True
+
+    CustomButton:
+        id: login_button
+        y: "40dp"
+        x: root.width / 2 - dp(30) + dp(40)
+        size_hint: None, None
+        size: root.width / 2 - dp(30), dp(56)
+
+        CustomLabel:
+            text: "LOGIN"
+            text_color: 0, 0, 0, 1
+            pos_hint: {"center_x": .5, "center_y": .5}
+            adaptive_size: True
