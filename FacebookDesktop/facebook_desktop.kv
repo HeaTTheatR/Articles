@@ -1,0 +1,586 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import Animation kivy.animation.Animation
+
+
+<MyIconButton@MDIconButton>
+    theme_text_color: "Custom"
+    text_color: get_color_from_hex("#4f5152")
+
+
+<MyLabel@MDLabel>
+    theme_text_color: "Custom"
+    text_color: get_color_from_hex("#4f5152")
+    font_name: "data/font/source-sans-pro/SourceSansPro-Regular.otf"
+
+
+<FiendCard@MDCard>
+    radius: 12
+    elevation: 2
+    size_hint_y: None
+    height: "72dp"
+    spacing: "12dp"
+    online: "online"
+    name: ""
+    avatar: ""
+
+    FitImage:
+        size_hint_x: None
+        width: "72dp"
+        source: root.avatar
+        radius: [12, ]
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: 0, "12dp", "12dp", "12dp"
+
+        MyLabel:
+            text: root.name
+            adaptive_size: True
+            font_name: "data/font/source-sans-pro/SourceSansPro-Bold.otf"
+
+        MDBoxLayout:
+            adaptive_height: True
+            spacing: "8dp"
+
+            Image:
+                source: "data/images/{}.png".format(root.online)
+                size_hint: None, None
+                size: "24dp", "24dp"
+
+            MyLabel:
+                text: "Online"
+                adaptive_size: True
+                font_name: "data/font/source-sans-pro/SourceSansPro-Bold.otf"
+                text_color: app.theme_cls.disabled_hint_text_color
+
+    MyIconButton:
+        icon: "email-outline"
+        pos_hint: {"center_y": .5}
+
+
+<ShakeButton@MDIconButton+MagicBehavior>
+    on_release: self.twist()
+
+
+<CardExistsPost@MDCard>
+    orientation: "vertical"
+    radius: 24
+    size_hint_y: None
+    height: "420dp"
+    padding: "12dp"
+    spacing: "12dp"
+
+    MDBoxLayout:
+        adaptive_height: True
+
+        TwoLineAvatarListItem:
+            text: "[font=data/font/source-sans-pro/SourceSansPro-Bold.otf]Joseph Cole[/font]"
+            secondary_text: "[font=data/font/source-sans-pro/SourceSansPro-Regular.otf]12 min ago[/font]"
+            divider: None
+            _no_ripple_effect: True
+
+            ImageLeftWidget:
+                source: "data/images/avatar-2.jpg"
+                radius: [12, ]
+
+        MDIconButton:
+            icon: "dots-vertical"
+            pos_hint: {"top": 1}
+
+    MyLabel:
+        adaptive_size: True
+        text: "Ut enim ad minima veniam, quis nostrum exercitationem ullam."
+        font_size: "14sp"
+
+    FitImage:
+        source: "data/images/image-post.jpg"
+        radius: [12, ]
+
+    MDBoxLayout:
+        adaptive_height: True
+
+        Widget:
+        ShakeButton:
+            icon: "thumb-up-outline"
+            theme_text_color: "Custom"
+            text_color: get_color_from_hex("#4f5152")
+
+        Widget:
+        ShakeButton:
+            icon: "message-reply-outline"
+            theme_text_color: "Custom"
+            text_color: get_color_from_hex("#4f5152")
+
+        Widget:
+
+        ShakeButton:
+            icon: "share-variant-outline"
+            theme_text_color: "Custom"
+            text_color: get_color_from_hex("#4f5152")
+
+        Widget:
+
+
+<CardNewPost@MDCard>
+    orientation: "vertical"
+    radius: 24
+    elevation: 24
+    size_hint_y: None
+    height: "280dp"
+    padding: 0, 0, 0, "24dp"
+
+    MDBoxLayout:
+        adaptive_size: True
+        pos_hint: {"center_x": .5}
+
+        MyIconButton:
+            icon: "image-outline"
+        MyIconButton:
+            icon: "video-outline"
+        MyIconButton:
+            icon: "music"
+        MyIconButton:
+            icon: "map-marker-outline"
+        MyIconButton:
+            icon: "file-outline"
+
+    MDTextField:
+        id: field
+        mode: "rectangle"
+        size_hint: .85, None
+        -height: "140dp"
+        pos_hint: {"center_x": .5}
+        hint_text: "What are you thinking"
+
+    Widget:
+        size_hint_y: None
+        height: "12dp"
+
+    MDRoundFlatButton:
+        text: "PUBLISH"
+        size_hint: .9, None
+        -height: "48dp"
+        pos_hint: {"center_x": .5}
+
+
+<StoryCard@MDRelativeLayout>
+    size_hint: None, None
+    size: "220dp", "248dp"
+    avatar: ""
+    wallpaper: ""
+    name: ""
+
+    MDCard
+        id: card
+        size_hint: None, None
+        size: "180dp", "220dp"
+        radius: 32
+        elevation: 18
+
+        FitImage:
+            source: root.wallpaper
+            radius: [32, ]
+            mipmap: True
+
+    FitImage:
+        size_hint: None, None
+        size: "180dp", "112dp"
+        source: "data/images/shadow-white.png"
+        radius: [28, 28, 0, 0]
+        mipmap: True
+        y: card.height - self.height
+
+    MDCard:
+        size_hint: None, None
+        size: "56dp", "56dp"
+        radius: 28
+        x: card.width / 2 - self.width / 2
+        y: card.height - self.height / 2
+        elevation: 18
+
+        FitImage:
+            source: root.avatar
+            radius: [28, ]
+            mipmap: True
+
+    FitImage:
+        size_hint: None, None
+        size: "180dp", "112dp"
+        source: "data/images/shadow-black.png"
+        radius: [0, 0, 28, 28]
+        mipmap: True
+
+    MDLabel:
+        text: root.name
+        adaptive_size: True
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        font_name: "data/font/source-sans-pro/SourceSansPro-Bold.otf"
+        x: card.width / 2 - self.width / 2
+        y: "12dp"
+
+
+<ChatCard>
+    orientation: "vertical"
+    size_hint_y: None
+    height: "140dp"
+    radius: 12
+    padding: "12dp"
+    spacing: "6dp"
+    elevation: 18
+    focus_behavior: True
+    avatar: ""
+    name: ""
+    text: ""
+    on_enter: Animation(x=root.parent.x + dp(12), d=0.4, t="out_cubic").start(root)
+    on_leave: Animation(x=root.parent.x + dp(24), d=0.4, t="out_cubic").start(root)
+
+    TwoLineAvatarListItem:
+        text: "[font=data/font/source-sans-pro/SourceSansPro-Bold.otf]{}[/font]".format(root.name)
+        secondary_text: "[font=data/font/source-sans-pro/SourceSansPro-Regular.otf]12 min ago[/font]"
+        divider: None
+        _no_ripple_effect: True
+
+        ImageLeftWidget:
+            source: root.avatar
+            radius: [12, ]
+
+    MDBoxLayout:
+        adaptive_height: True
+        padding: "48dp", 0, "36dp", "8dp"
+
+        MyLabel:
+            size_hint_y: None
+            height: dp(40)
+            text: root.text
+            -text_size: root.width - dp(12), dp(40)
+            font_size: "14sp"
+
+
+<BadgeButton@MDRelativeLayout>
+    icon: ""
+    text: ""
+    size_hint: None, None
+    size: icon_button.size
+
+    MDIconButton:
+        id: icon_button
+        icon: root.icon
+        theme_text_color: "Custom"
+        text_color: app.theme_cls.disabled_hint_text_color
+
+    MyLabel:
+        text: root.text
+        adaptive_size: True
+        font_style: "Caption"
+        text_color: 1, 1, 1, 1
+        x: icon_button.width - self.width - dp(6)
+        y: icon_button.height - self.height - dp(6)
+
+        canvas.before:
+            Color:
+                rgba: app.theme_cls.primary_color if root.text else (0, 0, 0, 0)
+            Ellipse:
+                pos: self.x - dp(2), self.y - dp(2)
+                size: self.width + dp(4), self.height + dp(4)
+
+
+<Tab>
+    orientation: "vertical"
+    size_hint: None, None
+    size: "56dp", "72dp"
+    padding: 0, "12dp", 0, 0
+
+    MDIconButton:
+        icon: root.icon
+        pos_hint: {"center_x": .5}
+        theme_text_color: "Custom"
+        text_color:
+            app.theme_cls.primary_color \
+            if root.active else app.theme_cls.disabled_hint_text_color
+        on_release: root.owner.set_active_tab(root)
+
+    Widget:
+
+    MDSeparator:
+        id: separator
+        color: app.theme_cls.primary_color
+        height: 2.5
+        opacity: 0
+
+
+<FacebookDesktop>
+    md_bg_color: get_color_from_hex("#e3f2fc")
+
+    MDBoxLayout:
+        orientation: "vertical"
+
+        MDBoxLayout:
+            id: tab_box
+            md_bg_color: root.theme_cls.bg_dark
+            size_hint_y: None
+            height: "72dp"
+            spacing: "32dp"
+            padding: "12dp", 0, "12dp", 0
+
+            Image:
+                source: "data/images/facebook.png"
+                mipmap: True
+                size_hint: None, None
+                size: "48dp", "48dp"
+                pos_hint: {"center_y": .5}
+
+            Widget:
+
+            Tab:
+                icon: "home"
+                owner: root
+
+            Tab:
+                icon: "youtube"
+                owner: root
+
+            Tab:
+                icon: "view-grid-outline"
+                owner: root
+
+            MDCard:
+                size_hint: None, None
+                size: "48dp", "48dp"
+                radius: 12
+                pos_hint: {"center_y": .5}
+
+                FitImage:
+                    source: "data/images/avatar.jpg"
+                    radius: [12, ]
+                    mipmap: True
+
+            Tab:
+                icon: "account-supervisor-outline"
+                owner: root
+
+            Tab:
+                icon: "email-multiple-outline"
+                owner: root
+
+            Tab:
+                icon: "emoticon-happy-outline"
+                owner: root
+
+            Widget:
+
+            Tab:
+                icon: "cog"
+                owner: root
+
+        MDBoxLayout:
+
+            MDRelativeLayout:
+                size_hint_x: None
+                width: "72dp"
+
+                MDCard:
+                    orientation: "vertical"
+                    size_hint: None, None
+                    size: "48dp", "150dp"
+                    radius: 24
+                    md_bg_color: root.theme_cls.bg_dark
+                    pos_hint: {"center_x": .9, "center_y": .5}
+
+                    BadgeButton:
+                        icon: "email"
+                        text: "10"
+
+                    BadgeButton:
+                        icon: "magnify"
+
+                    BadgeButton:
+                        icon: "bell-ring-outline"
+                        text: "20"
+
+            ScrollView:
+
+                MDBoxLayout:
+                    adaptive_height: True
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        padding: "24dp", "24dp", 0, "24dp"
+                        adaptive_height: True
+
+                        MyLabel:
+                            text: "      STORIES"
+                            adaptive_height: True
+                            font_style: "H5"
+
+                        ScrollView:
+                            size_hint_y: None
+                            height: "324dp"
+                            bar_width: 0
+
+                            MDGridLayout:
+                                rows: 1
+                                size_hint_x: None
+                                width: self.minimum_width
+                                padding: "24dp", "48dp", 0, 0
+
+                                StoryCard:
+                                    avatar: "data/images/avatar-2.jpg"
+                                    wallpaper: "data/images/stories-1.jpg"
+                                    name: "Joseph Cole"
+
+                                StoryCard:
+                                    avatar: "data/images/avatar-5.jpg"
+                                    wallpaper: "data/images/stories-2.jpg"
+                                    name: "Belinda Terry"
+
+                                StoryCard:
+                                    avatar: "data/images/avatar-4.jpg"
+                                    wallpaper: "data/images/stories-3.jpg"
+                                    name: "Charles Hodges"
+
+                                StoryCard:
+                                    avatar: "data/images/avatar-3.jpg"
+                                    wallpaper: "data/images/stories-4.jpg"
+                                    name: "Daniel Poole"
+
+                                StoryCard:
+                                    avatar: "data/images/avatar-6.jpg"
+                                    wallpaper: "data/images/stories-5.jpg"
+                                    name: "Sophie Simpson"
+
+                                StoryCard:
+                                    avatar: "data/images/avatar-7.jpg"
+                                    wallpaper: "data/images/stories-6.jpg"
+                                    name: "Marvin Mosley"
+
+                                StoryCard:
+                                    avatar: "data/images/avatar-9.jpg"
+                                    wallpaper: "data/images/stories-8.jpg"
+                                    name: "Mary Moody"
+
+                        MDBoxLayout:
+                            adaptive_height: True
+                            spacing: "24dp"
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                size_hint_x: .6
+                                padding: "24dp", "42dp", 0, 0
+                                spacing: "12dp"
+                                adaptive_height: True
+
+                                MyLabel:
+                                    text: "NEW POST"
+                                    adaptive_size: True
+                                    font_style: "H5"
+
+                                CardNewPost:
+
+                                Widget:
+                                    size_hint_y: None
+                                    height: "12dp"
+
+                                CardExistsPost:
+
+                            MDBoxLayout:
+                                orientation: "vertical"
+                                size_hint_x: .4
+                                spacing: "12dp"
+
+                                MyLabel:
+                                    text: "YOUR FRIENDS"
+                                    adaptive_size: True
+                                    font_style: "H5"
+
+                                Widget:
+                                    size_hint_y: None
+                                    height: "12dp"
+
+                                FiendCard:
+                                    avatar: "data/images/avatar-5.jpg"
+                                    name: "Belinda Terry"
+
+                                FiendCard:
+                                    online: "offline"
+                                    avatar: "data/images/avatar-4.jpg"
+                                    name: "Charles Hodges"
+
+                                FiendCard:
+                                    avatar: "data/images/avatar-3.jpg"
+                                    name: "Daniel Poole"
+
+                                FiendCard:
+                                    avatar: "data/images/avatar-6.jpg"
+                                    name: "Sophie Simpson"
+
+                                Widget:
+                                    size_hint_y: None
+                                    height: "12dp"
+
+                                MyLabel:
+                                    text: "SUGGESTED FRIENDS"
+                                    adaptive_size: True
+                                    font_style: "H5"
+
+                                Widget:
+                                    size_hint_y: None
+                                    height: "12dp"
+
+                                FiendCard:
+                                    online: "offline"
+                                    avatar: "data/images/avatar-7.jpg"
+                                    name: "Marvin Mosley"
+
+                                Widget:
+
+                    MDBoxLayout:
+                        orientation: "vertical"
+                        size_hint_x: None
+                        width: "390dp"
+                        padding: "24dp", "24dp", "6dp", 0
+
+                        MDBoxLayout:
+                            padding: "24dp", 0, "24dp", "24dp"
+
+                            MyLabel:
+                                text: "Last chats"
+                                adaptive_height: True
+                                font_style: "H6"
+
+                        MDBoxLayout:
+                            orientation: "vertical"
+                            adaptive_height: True
+                            padding: "24dp"
+                            spacing: "24dp"
+                            md_bg_color: get_color_from_hex("#cce6f8")
+                            radius: 12
+
+                            ChatCard:
+                                id: card_1
+                                avatar: "data/images/avatar-2.jpg"
+                                name: "Joseph Cole"
+                                text: "Sed ut perspiciatis unde omnis iste natus error sit voluptatem"
+
+                            ChatCard:
+                                id: card_2
+                                avatar: "data/images/avatar-3.jpg"
+                                name: "Daniel Poole"
+                                text: "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed"
+
+                            ChatCard:
+                                id: card_3
+                                avatar: "data/images/avatar-4.jpg"
+                                name: "Charles Hodges"
+                                text: "Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit"
+
+
+                            ChatCard:
+                                id: card_4
+                                avatar: "data/images/avatar-5.jpg"
+                                name: "Belinda Terry"
+                                text: "Quis autem vel eum iure reprehenderit qui"
+
+                        Widget:
+                            size_hint_y: None
+                            height: "460dp"
