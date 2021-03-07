@@ -13,15 +13,12 @@
     font_name: "data/font/source-sans-pro/SourceSansPro-Regular.otf"
 
 
-<FiendCard@MDCard>
+<FiendCard>
     radius: 12
     elevation: 2
     size_hint_y: None
     height: "72dp"
     spacing: "12dp"
-    online: "online"
-    name: ""
-    avatar: ""
 
     FitImage:
         size_hint_x: None
@@ -48,10 +45,11 @@
                 size: "24dp", "24dp"
 
             MyLabel:
-                text: "Online"
-                adaptive_size: True
+                text: "{}".format(root.online.capitalize())
+                adaptive_height: True
                 font_name: "data/font/source-sans-pro/SourceSansPro-Bold.otf"
                 text_color: app.theme_cls.disabled_hint_text_color
+                on_size: self.text = root.online.capitalize()
 
     MyIconButton:
         icon: "email-outline"
@@ -165,7 +163,7 @@
 
 <StoryCard@MDRelativeLayout>
     size_hint: None, None
-    size: "220dp", "248dp"
+    size: "220dp", "260dp"
     avatar: ""
     wallpaper: ""
     name: ""
@@ -173,7 +171,7 @@
     MDCard
         id: card
         size_hint: None, None
-        size: "180dp", "220dp"
+        size: "180dp", "232dp"
         radius: 32
         elevation: 18
 
@@ -201,7 +199,7 @@
         FitImage:
             source: root.avatar
             radius: [28, ]
-            mipmap: True
+            # mipmap: True
 
     FitImage:
         size_hint: None, None
@@ -415,7 +413,7 @@
 
                         ScrollView:
                             size_hint_y: None
-                            height: "324dp"
+                            height: "336dp"
                             bar_width: 0
 
                             MDGridLayout:
@@ -500,6 +498,7 @@
                                 FiendCard:
                                     avatar: "data/images/avatar-5.jpg"
                                     name: "Belinda Terry"
+                                    online: "online"
 
                                 FiendCard:
                                     online: "offline"
@@ -509,10 +508,12 @@
                                 FiendCard:
                                     avatar: "data/images/avatar-3.jpg"
                                     name: "Daniel Poole"
+                                    online: "online"
 
                                 FiendCard:
                                     avatar: "data/images/avatar-6.jpg"
                                     name: "Sophie Simpson"
+                                    online: "online"
 
                                 Widget:
                                     size_hint_y: None
