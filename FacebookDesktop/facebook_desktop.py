@@ -25,6 +25,12 @@ class ChatCard(MDCard, FakeRectangularElevationBehavior):
     pass
 
 
+class FiendCard(MDCard):
+    online = StringProperty("online")
+    name = StringProperty()
+    avatar = StringProperty()
+
+
 class Tab(MDBoxLayout):
     icon = StringProperty()
     owner = ObjectProperty()
