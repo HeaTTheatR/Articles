@@ -24,10 +24,14 @@
             adaptive_height: True
             spacing: "8dp"
 
-            Image:
-                source: "data/images/{}.png".format(root.online)
+            MDBoxLayout:
                 size_hint: None, None
-                size: "24dp", "24dp"
+                size: "16dp", "16dp"
+                radius: 8
+                md_bg_color:
+                    get_color_from_hex("#e0584b") \
+                    if root.online == "offline" else \
+                    get_color_from_hex("#329a34")
 
             MyLabel:
                 adaptive_height: True
