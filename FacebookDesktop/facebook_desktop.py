@@ -1,9 +1,6 @@
 import ast
 import os
 
-from kivy.animation import Animation
-from kivy.properties import ObjectProperty, StringProperty, BooleanProperty
-
 from kivymd.uix.screen import MDScreen
 from kivymd.uix.boxlayout import MDBoxLayout
 from kivymd.theming import ThemableBehavior
