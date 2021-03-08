@@ -1,0 +1,24 @@
+<Tab>
+    orientation: "vertical"
+    size_hint: None, None
+    size: "56dp", "72dp"
+    padding: 0, "12dp", 0, 0
+
+    MyIconButton:
+        icon: root.icon
+        pos_hint: {"center_x": .5}
+        on_release: app.root.set_active_tab(root)
+        text_color:
+            app.theme_cls.primary_color \
+            if root.active else app.theme_cls.disabled_hint_text_color
+
+    Widget:
+
+    MDSeparator:
+        id: separator
+        color: app.theme_cls.primary_color
+        height: 2.5
+        opacity: 0
+        size_hint_x: None
+        width: 0
+        pos_hint: {"center_x": .5}

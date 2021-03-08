@@ -1,0 +1,45 @@
+<StoryCard>
+    size_hint: None, None
+    size: "220dp", "280dp"
+
+    MDCard
+        id: card
+        size_hint: None, None
+        size: "180dp", "252dp"
+        radius: 32
+        elevation: 18
+
+        FitImage:
+            source: root.story
+            radius: [32, ]
+            mipmap: True
+
+    MDCard:
+        id: avatar
+        size_hint: None, None
+        size: "56dp", "56dp"
+        radius: 28
+        x: card.width / 2 - self.width / 2
+        y: card.height - self.height / 2
+        elevation: 18
+
+        FitImage:
+            source: root.avatar
+            radius: [28, ]
+            mipmap: True
+
+    FitImage:
+        size_hint: None, None
+        size: "180dp", "112dp"
+        source: "assets/images/shadow-black.png"
+        radius: [0, 0, 28, 28]
+        mipmap: True
+
+    MDLabel:
+        text: root.name
+        adaptive_size: True
+        theme_text_color: "Custom"
+        text_color: 1, 1, 1, 1
+        font_name: "assets/font/SourceSansPro-Bold.otf"
+        x: card.width / 2 - self.width / 2
+        y: "12dp"

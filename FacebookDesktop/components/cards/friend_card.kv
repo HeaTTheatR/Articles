@@ -1,0 +1,40 @@
+<FriendCard>
+    radius: 12
+    elevation: 2
+    size_hint_y: None
+    height: "72dp"
+    spacing: "12dp"
+
+    FitImage:
+        size_hint_x: None
+        width: "72dp"
+        source: root.avatar
+        radius: [12, ]
+
+    MDBoxLayout:
+        orientation: "vertical"
+        padding: 0, "12dp", "12dp", "12dp"
+
+        MyLabel:
+            text: root.name
+            adaptive_size: True
+            font_name: "assets/font/SourceSansPro-Bold.otf"
+
+        MDBoxLayout:
+            adaptive_height: True
+            spacing: "8dp"
+
+            Image:
+                source: "data/images/{}.png".format(root.online)
+                size_hint: None, None
+                size: "24dp", "24dp"
+
+            MyLabel:
+                adaptive_height: True
+                font_name: "assets/font/SourceSansPro-Bold.otf"
+                text_color: app.theme_cls.disabled_hint_text_color
+                on_size: self.text = root.online.capitalize()
+
+    MyIconButton:
+        icon: "email-outline"
+        pos_hint: {"center_y": .5}

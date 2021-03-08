@@ -1,0 +1,55 @@
+<ShakeButton@MyIconButton+MagicBehavior>
+    on_release: self.twist()
+
+
+<PostCard>
+    orientation: "vertical"
+    radius: 24
+    size_hint_y: None
+    height: "420dp"
+    padding: "12dp"
+    spacing: "12dp"
+    elevation: 12
+
+    MDBoxLayout:
+        adaptive_height: True
+
+        TwoLineAvatarListItem:
+            text: "[font=assets/font/SourceSansPro-Bold.otf]Joseph Cole[/font]"
+            secondary_text: "[font=assets/font/SourceSansPro-Regular.otf]12 min ago[/font]"
+            divider: None
+            _no_ripple_effect: True
+
+            ImageLeftWidget:
+                source: "https://images.unsplash.com/photo-1549068106-b024baf5062d?ixlib=rb-1.2.1&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=200&fit=max&ixid=eyJhcHBfaWQiOjE3Nzg0fQ"
+                radius: [12, ]
+
+        MyIconButton:
+            icon: "dots-vertical"
+            pos_hint: {"top": 1}
+
+    MyLabel:
+        adaptive_size: True
+        text: "Ut enim ad minima veniam, quis nostrum exercitationem ullam."
+        font_size: "14sp"
+
+    FitImage:
+        source: "https://res.cloudinary.com/practicaldev/image/fetch/s--EPQDBC2W--/c_limit%2Cf_auto%2Cfl_progressive%2Cq_auto%2Cw_880/https://cdn-images-1.medium.com/max/1600/1%2AMGZ23iwd1nuouibCC-_-xg.jpeg"
+        radius: [12, ]
+
+    MDBoxLayout:
+        adaptive_height: True
+
+        Widget:
+        ShakeButton:
+            icon: "thumb-up-outline"
+
+        Widget:
+        ShakeButton:
+            icon: "message-reply-outline"
+
+        Widget:
+        ShakeButton:
+            icon: "share-variant-outline"
+
+        Widget:

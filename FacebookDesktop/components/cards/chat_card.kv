@@ -1,0 +1,35 @@
+#:import Animation kivy.animation.Animation
+
+
+<ChatCard>
+    orientation: "vertical"
+    size_hint_y: None
+    height: "140dp"
+    radius: 12
+    padding: "12dp"
+    spacing: "6dp"
+    elevation: 18
+    focus_behavior: True
+    on_enter: Animation(x=root.parent.x + dp(12), d=0.4, t="out_cubic").start(root)
+    on_leave: Animation(x=root.parent.x + dp(24), d=0.4, t="out_cubic").start(root)
+
+    TwoLineAvatarListItem:
+        text: "[font=assets/font/SourceSansPro-Bold.otf]{}[/font]".format(root.name)
+        secondary_text: "[font=assets/font/SourceSansPro-Regular.otf]12 min ago[/font]"
+        divider: None
+        _no_ripple_effect: True
+
+        ImageLeftWidget:
+            source: root.avatar
+            radius: [12, ]
+
+    MDBoxLayout:
+        adaptive_height: True
+        padding: "48dp", 0, "36dp", "8dp"
+
+        MyLabel:
+            size_hint_y: None
+            height: dp(40)
+            text: root.text
+            -text_size: root.width - dp(12), dp(40)
+            font_size: "14sp"

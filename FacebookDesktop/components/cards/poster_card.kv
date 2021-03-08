@@ -1,0 +1,45 @@
+<MyIconButton@MDIconButton>
+    theme_text_color: "Custom"
+    text_color: app.theme_cls.disabled_hint_text_color
+
+
+<PosterCardCard>
+    orientation: "vertical"
+    radius: 24
+    elevation: 12
+    size_hint_y: None
+    height: "280dp"
+    padding: 0, 0, 0, "24dp"
+
+    MDBoxLayout:
+        adaptive_size: True
+        pos_hint: {"center_x": .5}
+
+        MyIconButton:
+            icon: "image-outline"
+        MyIconButton:
+            icon: "video-outline"
+        MyIconButton:
+            icon: "music"
+        MyIconButton:
+            icon: "map-marker-outline"
+        MyIconButton:
+            icon: "file-outline"
+
+    MDTextField:
+        id: field
+        mode: "rectangle"
+        size_hint: .85, None
+        -height: "140dp"
+        pos_hint: {"center_x": .5}
+        hint_text: "What are you thinking"
+
+    Widget:
+        size_hint_y: None
+        height: "12dp"
+
+    MDRoundFlatButton:
+        text: "PUBLISH"
+        size_hint: .9, None
+        -height: "48dp"
+        pos_hint: {"center_x": .5}

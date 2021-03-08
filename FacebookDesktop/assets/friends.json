@@ -1,0 +1,18 @@
+{
+  "Belinda Terry": {
+    "avatar": "https://randomuser.me/api/portraits/women/44.jpg",
+    "online": "online",
+  },
+  "Charles Hodges": {
+    "avatar": "https://randomuser.me/api/portraits/women/52.jpg",
+    "online": "offline",
+  },
+  "Daniel Poole": {
+    "avatar": "https://randomuser.me/api/portraits/men/53.jpg",
+    "online": "online",
+  },
+  "Sophie Simpson": {
+    "avatar": "https://randomuser.me/api/portraits/women/55.jpg",
+    "online": "online",
+  },
+}
