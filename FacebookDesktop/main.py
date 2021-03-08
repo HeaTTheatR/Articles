@@ -23,7 +23,6 @@ class FacebookDesktopMain(MDApp):
         for d, dirs, files in os.walk(self.directory):
             for f in files:
                 if os.path.splitext(f)[1] == ".kv":
-                    print(f)
                     path = os.path.join(d, f)
                     with open(path, encoding="utf-8") as kv_file:
                         Builder.load_string(kv_file.read())
