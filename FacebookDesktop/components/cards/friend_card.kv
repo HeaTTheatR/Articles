@@ -19,6 +19,7 @@
             text: root.name
             adaptive_size: True
             font_name: "assets/font/SourceSansPro-Bold.otf"
+            shorten: True
 
         MDBoxLayout:
             adaptive_height: True
@@ -38,6 +39,7 @@
                 font_name: "assets/font/SourceSansPro-Bold.otf"
                 text_color: app.theme_cls.disabled_hint_text_color
                 on_size: self.text = root.online.capitalize()
+                shorten: True
 
     MyIconButton:
         icon: "email-outline"
