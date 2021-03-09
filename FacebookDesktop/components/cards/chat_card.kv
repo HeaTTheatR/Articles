@@ -13,15 +13,23 @@
     on_enter: Animation(x=root.parent.x + dp(12), d=0.4, t="out_cubic").start(root)
     on_leave: Animation(x=root.parent.x + dp(24), d=0.4, t="out_cubic").start(root)
 
-    TwoLineAvatarListItem:
-        text: "[font=assets/font/SourceSansPro-Bold.otf]{}[/font]".format(root.name)
-        secondary_text: "[font=assets/font/SourceSansPro-Regular.otf]12 min ago[/font]"
-        divider: None
-        _no_ripple_effect: True
+    MDBoxLayout:
+        adaptive_height: True
 
-        ImageLeftWidget:
-            source: root.avatar
-            radius: [12, ]
+        TwoLineAvatarListItem:
+            text: "[font=assets/font/SourceSansPro-Bold.otf]{}[/font]".format(root.name)
+            secondary_text: "[font=assets/font/SourceSansPro-Regular.otf]12 min ago[/font]"
+            divider: None
+            _no_ripple_effect: True
+
+            ImageLeftWidget:
+                source: root.avatar
+                radius: [12, ]
+
+        MyIconButton:
+            text_color: app.theme_cls.primary_color
+            icon: "message-bulleted"
+            pos_hint: {"top": 1}
 
     MDBoxLayout:
         adaptive_height: True
