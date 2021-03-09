@@ -5,18 +5,22 @@
     MDCard:
         orientation: "vertical"
         size_hint: None, None
-        size: "48dp", "150dp"
+        size: "52dp", "150dp"
         radius: 24
+        elevation: 16
         md_bg_color: app.theme_cls.bg_dark
         pos_hint: {"center_x": .9, "center_y": .5}
 
         BadgeButton:
             icon: "email"
             text: "10"
+            pos_hint: {"center_x": .5}
 
         BadgeButton:
             icon: "magnify"
+            pos_hint: {"center_x": .5}
 
         BadgeButton:
             icon: "bell-ring-outline"
             text: "20"
+            pos_hint: {"center_x": .5}
