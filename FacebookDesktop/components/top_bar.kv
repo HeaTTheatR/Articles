@@ -1,0 +1,46 @@
+<TopBar@MDBoxLayout>
+    md_bg_color: app.theme_cls.bg_dark
+    size_hint_y: None
+    height: "72dp"
+    spacing: "32dp"
+    padding: "12dp", 0, "12dp", 0
+
+    FitImage:
+        source: "assets/images/facebook_logo.jpg"
+        mipmap: True
+        size_hint: None, None
+        size: "48dp", "48dp"
+        pos_hint: {"center_y": .5}
+        radius: [14, ]
+
+    Widget:
+
+    Tab:
+        icon: "home"
+    Tab:
+        icon: "youtube"
+    Tab:
+        icon: "view-grid-outline"
+
+    FakeCard:
+        size_hint: None, None
+        size: "48dp", "48dp"
+        radius: 12
+        pos_hint: {"center_y": .5}
+
+        FitImage:
+            source: "assets/images/avatar.jpg"
+            radius: [12, ]
+            mipmap: True
+
+    Tab:
+        icon: "account-supervisor-outline"
+    Tab:
+        icon: "email-multiple-outline"
+    Tab:
+        icon: "emoticon-happy-outline"
+
+    Widget:
+
+    Tab:
+        icon: "cog"
