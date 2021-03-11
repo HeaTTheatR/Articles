@@ -1,5 +1,6 @@
 from kivy.animation import Animation
 from kivy.properties import StringProperty, BooleanProperty
+
 from kivymd.uix.boxlayout import MDBoxLayout
 
 
