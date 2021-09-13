@@ -11,5 +11,5 @@ Simple OnBoarding Screen created in Kivy/KivyMD
 ### Dependencies
 
 - [Kivy](https://github.com/kivy/kivy) >= 2.0.0 ([Installation](https://kivy.org/doc/stable/gettingstarted/installation.html))
-- [KivyMD](https://github.com/kivymd/KivyMD) >= 2.0.0 ([Installation](https://github.com/kivymd/KivyMD#how-to-install))
+- [KivyMD](https://github.com/kivymd/KivyMD) >= 0.104.2 ([Installation](https://github.com/kivymd/KivyMD#how-to-install))
 - [HotReload tool](https://github.com/HeaTTheatR/kaki)
