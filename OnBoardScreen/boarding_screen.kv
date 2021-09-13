@@ -1,0 +1,69 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:set root_color get_color_from_hex("#5ac1c2")
+
+
+<Dot@MDBoxLayout>
+    index: 0
+    size_hint: None, None
+    size: "12dp", "12dp"
+    radius: self.size[0] / 2
+    md_bg_color: app.theme_cls.disabled_hint_text_color
+
+
+<BoardScreen>
+    md_bg_color: 1, 1, 1, 1
+
+    MDCarousel:
+        on_slide_complete: root.on_slide_complete(self)
+
+        Slide:
+            source: "assets/images/slide-1.png"
+            text: "Plan trip to more than 90 countries"
+
+        Slide:
+            source: "assets/images/slide-2.png"
+            text: "Hassle free and quick flight booking"
+
+        Slide:
+            source: "assets/images/slide-3.png"
+            text: "Realtime flight status to keep you informed"
+
+    MDBoxLayout:
+        id: box_dots
+        adaptive_size: True
+        pos_hint: {"center_x": .5}
+        spacing: "8dp"
+        y: button_box.y + dp(72)
+
+        Dot:
+            md_bg_color: root_color
+            index: 0
+        Dot:
+            index: 1
+        Dot:
+            index: 2
+
+    MDBoxLayout:
+        id: button_box
+        adaptive_height: True
+        size_hint_x: None
+        width: root.width - dp(36)
+        pos_hint: {"center_x": .5}
+        y: "36dp"
+
+        MDFillRoundFlatButton:
+            text: "[size=20][b]BOOK YOUR TRIP[/b][/size]"
+            size_hint: None, None
+            -width: button_box.width
+            -height: "56dp"
+            _radius: self.height / 2
+            md_bg_color: root_color
+
+    MDLabel:
+        text: "Sign In"
+        bold: True
+        theme_text_color: "Custom"
+        text_color: app.theme_cls.disabled_hint_text_color
+        adaptive_size: True
+        pos_hint: {"center_x": .5}
+        y: "8dp"
