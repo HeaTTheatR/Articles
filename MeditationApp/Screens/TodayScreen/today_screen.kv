@@ -1,0 +1,159 @@
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+
+
+<ContainerIcon@IRightBodyTouch+MDBoxLayout>
+    adaptive_height: True
+
+
+<TodayScreen>
+
+    ScrollView:
+
+        MDGridLayout:
+            cols: 1
+            adaptive_height: True
+
+            MDRelativeLayout:
+                id: image_bg_box
+                md_bg_color: get_color_from_hex("#c3bdf0")
+                size_hint_y: None
+                height: root.height * 45 / 100
+                pos_hint: {"top": 1}
+
+                Image:
+                    source: "assets/images/undraw_pilates_gpdb.png"
+                    size_hint: None, None
+                    allow_stretch: True
+                    keep_ratio: False
+                    x: -dp(20)
+                    y: dp(40)
+                    size:
+                        self.parent.width - dp(72), self.parent.height - dp(72)
+
+                Image:
+                    source: "assets/icons/yoga_women.png"
+                    size_hint: None, None
+                    size: self.texture_size
+                    x: root.width - self.width
+                    y: dp(40)
+
+                MDBoxLayout:
+                    orientation: "vertical"
+                    adaptive_height: True
+                    spacing: "8dp"
+                    padding: 0, "24dp", 0, 0
+                    pos_hint: {"top": 1}
+                    x: "36dp"
+
+                    MDLabel:
+                        text: "Meditation"
+                        bold: True
+                        adaptive_height: True
+                        font_size: "24sp"
+                        font_name: "assets/fonts/Cairo/Cairo-Black.ttf"
+                        theme_text_color: "Custom"
+                        text_color: get_color_from_hex("#363445")
+
+                    MDLabel:
+                        text: "3-10 MIN Course"
+                        bold: True
+                        adaptive_height: True
+                        font_size: "18sp"
+                        font_name: "assets/fonts/Cairo/Cairo-Bold.ttf"
+                        theme_text_color: "Custom"
+                        text_color: get_color_from_hex("#363445")
+
+                    MDLabel:
+                        adaptive_size: True
+                        font_size: "16sp"
+                        font_name: "assets/fonts/Cairo/Cairo-Regular.ttf"
+                        theme_text_color: "Custom"
+                        text_color: get_color_from_hex("#363445")
+                        line_height: .7
+                        -text_size: root.width - dp(100), None
+                        text:
+                            "Live happier and healthier by learning the " \
+                            "fundamentals of meditation and mindfulness"
+
+                    MDBoxLayout:
+                        adaptive_height: True
+                        padding: "8dp", 0, 0, 0
+                        size_hint_x: .4
+
+                        MDTextFieldRound:
+                            icon_left: "magnify"
+                            hint_text: "Search"
+                            size_hint_y: None
+                            -height: "38dp"
+                            normal_color: 1, 1, 1, 1
+
+                MDGridLayout:
+                    id: cards_box
+                    cols: 2
+                    rows: 3
+                    spacing: "18dp"
+                    padding: "24dp"
+                    adaptive_height: True
+                    y: image_bg_box.y - self.height + card.height
+
+                    CardToday:
+                        id: card
+                        text: "Session 01"
+                        icon: "play-circle"
+
+                    CardToday:
+                        text: "Session 02"
+
+                    CardToday:
+                        text: "Session 03"
+
+                    CardToday:
+                        text: "Session 04"
+
+                    CardToday:
+                        text: "Session 05"
+
+                    CardToday:
+                        text: "Session 06"
+
+                MDBoxLayout:
+                    adaptive_height: True
+                    padding: "24dp", 0, 0, 0
+                    y: cards_box.y - self.height / 2
+
+                    MDLabel:
+                        id: lbl_meditation
+                        text: "Meditation"
+                        font_name: "assets/fonts/Cairo/Cairo-Bold.ttf"
+                        adaptive_height: True
+
+                MDBoxLayout:
+                    adaptive_height: True
+                    padding: "24dp", 0, "24dp", 0
+                    y: cards_box.y - self.height - lbl_meditation.height
+
+                    MDCard:
+                        orientation: "vertical"
+                        spacing: "12dp"
+                        size_hint: None, None
+                        size: root.width - dp(36), item_list.height
+                        radius: 12
+                        elevation: 12
+
+                        TwoLineAvatarIconListItem:
+                            id: item_list
+                            text: "Basics 2"
+                            secondary_text: "Start your deepen you practice"
+                            on_size:
+                                self.ids._right_container.height = \
+                                container.height
+
+                            ImageLeftWidget:
+                                source: "assets/icons/meditation.png"
+
+                            ContainerIcon:
+                                id: container
+
+                                MDIcon:
+                                    icon: "lock-outline"
+                                    pos_hint: {"center_y": .6}

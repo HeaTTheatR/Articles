@@ -1,0 +1,23 @@
+<CardToday>
+    radius: 12
+    padding: "12dp"
+    size_hint_y: None
+    height: self.minimum_height
+    ripple_behavior: True
+
+    MDIcon:
+        icon: root.icon
+        size_hint: None, None
+        size: "36dp", "36dp"
+        pos_hint: {"center_y": .5}
+        theme_text_color: "Custom"
+        text_color: get_color_from_hex("#7f86b6")
+
+    MDLabel:
+        text: root.text
+        halign: "center"
+        adaptive_height: True
+        font_name: "assets/fonts/Cairo/Cairo-Bold.ttf"
+        line_height: .6
+        font_size: "14sp"
+        pos_hint: {"center_y": .5}
