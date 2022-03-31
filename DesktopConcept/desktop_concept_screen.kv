@@ -1,0 +1,158 @@
+#:import MaskEffect mask.MaskEffect
+#:import effect kivy.uix.effectwidget.EffectWidget
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import Clock kivy.clock.Clock
+
+#:set root_color get_color_from_hex("#747474")
+
+
+<CustomMDLabel@MDLabel>
+    font_name: "assets/fonts/MontserratAlternates-Bold.otf"
+
+
+<CustomMDIconButton@MDIconButton>
+    theme_icon_color: "Custom"
+    icon_color: root.parent.parent.color_data[root.parent.parent.index_slide]
+
+
+<CustomMDFlatButton@MDFlatButton>
+    theme_text_color: "Custom"
+    pos_hint: {"center_y": .5}
+    text_color:
+        root.parent.parent.color_data[root.parent.parent.index_slide] \
+        if hasattr(root.parent.parent, "color_data") else \
+        root.parent.parent.parent.color_data[root.parent.parent.parent.index_slide]
+
+
+<DesktopConceptScreenView>
+
+    EffectWidget:
+        id: mask
+        opacity: 0
+
+        MDLabel:
+            id: label
+            adaptive_size: True
+            text: 'ice'
+            font_size: '180sp'
+            bold: True
+            pos_hint: {"center_y": .6}
+            x: glass.width - (self.width + dp(24))
+            font_name: "assets/fonts/MontserratAlternates-ExtraBold.otf"
+
+    FitImage:
+        id: image
+        source: "assets/images/island-0.jpg"
+
+    MDLabel:
+        adaptive_size: True
+        text: "land"
+        font_size: '180sp'
+        bold: True
+        pos: glass.width, label.y - (self.height - dp(80))
+        color: 1, 1, 1, 1
+        font_name: "assets/fonts/MontserratAlternates-ExtraBold.otf"
+
+    VerticalLabel:
+        text: "ADVENTURE"
+        font_size: '40sp'
+        pos_hint: {"center_y": .5}
+        rotate_value_angle: 90
+        adaptive_size: True
+        bold: True
+        x: root.width - (self.width - sp(100))
+        color: 1, 1, 1, 1
+
+
+    EffectWidget:
+        effects: [MaskEffect(mask=mask, mode='substract')]
+
+        FrostedGlass:
+            id: glass
+            size_hint_x: .4
+            background: image
+            blur_size: 15
+            outline_color: "#00000000"
+
+    MDBoxLayout:
+        adaptive_height: True
+        pos_hint: {"top": 1}
+        padding: "60dp", "6dp", "60dp", 0
+
+        CustomMDFlatButton:
+            text: "[b]FOLLOW US[/b]"
+
+        CustomMDIconButton:
+            icon: "whatsapp"
+
+        CustomMDIconButton:
+            icon: "instagram"
+
+        CustomMDIconButton:
+            icon: "youtube"
+
+        CustomMDIconButton:
+            icon: "twitter"
+
+        Widget:
+
+        MDBoxLayout:
+            adaptive_height: True
+            spacing: "24dp"
+
+            CustomMDFlatButton:
+                text: "[b]DESTINATIONS US[/b]"
+
+            CustomMDFlatButton:
+                text: "[b]DEALS US[/b]"
+
+            CustomMDFlatButton:
+                text: "[b]SPECIAL OFFERS US[/b]"
+
+            CustomMDFlatButton:
+                text: "[b]ABOUT US[/b]"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: "12dp"
+        padding: 0, 0, 0, "12dp"
+
+        MDLabel:
+            adaptive_size: True
+            text: "DISCOVER TOURS"
+            font_size: '36sp'
+            text_size: glass.width, None
+            bold: True
+            color: 1, 1, 1, 1
+            padding_x: "60dp"
+            font_name: "assets/fonts/MontserratAlternates-Bold.otf"
+
+        CustomMDLabel:
+            adaptive_size: True
+            text:
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, " \
+                "sed do eiusmod tempor incididunt ut labore et dolore magna " \
+                "aliqua. Ut enim ad minim veniam."
+            font_size: "12dp"
+            text_size: glass.width, None
+            color: .7, .7, .7, 1
+            padding_x: "60dp"
+
+        CustomMDLabel:
+            adaptive_size: True
+            text: "See next landscape"
+            font_size: '24sp'
+            text_size: glass.width, None
+            color: 1, 1, 1, 1
+            padding_x: "60dp"
+            bold: True
+
+    MDIconButton:
+        icon: "chevron-right"
+        theme_icon_color: "Custom"
+        icon_color: 1, 1, 1, 1
+        pos: glass.width - (self.width + dp(12)), "6dp"
+        on_release:
+            root.set_index_slide()
+            image.source = f"assets/images/island-{root.index_slide}.jpg"
+            Clock.schedule_once(lambda x: glass.on_size(None, None), 0.2)
